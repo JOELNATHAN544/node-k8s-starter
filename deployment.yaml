@@ -20,5 +20,18 @@ spec:
         - containerPort: 3000
         env:
         - name: NODE_ENV
-          value: "development"
+          valueFrom:
+            configMapKeyRef:
+              name: node-web-app-config
+              key: NODE_ENV
+        - name: APP_MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: node-web-app-config
+              key: APP_MESSAGE
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: node-web-app-secret
+              key: SECRET_KEY
         command: ["npm", "start"] 
